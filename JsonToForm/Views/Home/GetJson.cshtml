@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Загрузка файла JSON";
+}
+
+<h3>Загрузка файла JSON</h3>
+
+<h4 class="text-danger">@TempData["message"]</h4>
+
+<form asp-action="GenerateForm" asp-controller="Home" method="post" enctype="multipart/form-data">
+    <input type="file" name="jsonFile" accept=".json" required/>
+    <br />
+    <br />
+    <input type="submit" value="Загрузить" />
+</form>

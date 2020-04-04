@@ -1,0 +1,107 @@
+﻿@using JsonToFofm.Models;
+@model JsonToForm.Models.FormsViewModel
+
+@{
+    ViewData["Title"] = "Форма";
+}
+
+<h4 class="text-danger">@TempData["message"]</h4>
+
+<div class="jumbotron">
+
+    <h2>@Model.Name</h2>
+
+    <p hidden>@Model.PostMessage</p>
+
+    <form>
+        @foreach (var type in Model.Items)
+        {
+            if (type is Filler)
+            {
+                var filler = (Filler)type;
+
+                <h4>@filler.Message</h4>
+            }
+
+            else if (type is Text)
+            {
+                var text = (Text)type;
+
+                <p>
+                    <label>@text.Label</label><br />
+
+                    <input type="@text.ValidationRules" name="@text.Name" class="@text.Class"
+                              value="@text.Value" placeholder="@text.Placeholder" required="@text.Required" disabled="@text.Disabled" />
+                </p>
+            }
+
+            else if (type is TextArea)
+            {
+                var textArea = (TextArea)type;
+
+                <p>
+                    <label>@textArea.Label</label><br />
+
+                    <textarea type="@textArea.ValidationRules" name="@textArea.Name" class="@textArea.Class"
+                           value="@textArea.Value" placeholder="@textArea.Placeholder" required="@textArea.Required" disabled="@textArea.Disabled">
+                    </textarea>
+                </p>
+
+            }
+
+            else if (type is CheckBox)
+            {
+                var checkBox = (CheckBox)type;
+
+                <p>
+                    <label>@checkBox.Label</label><br />
+
+                    <input type="@checkBox.ValidationRules" name="@checkBox.Name" class="@checkBox.Class"
+                           required="@checkBox.Required" checked="@checkBox.Checked" disabled="@checkBox.Disabled" />@checkBox.Value<br />
+                </p>
+            }
+
+
+                else if (type is Select)
+                {
+                    var select = (Select)type;
+
+                    <p>
+                        <label>@select.Label</label><br />
+
+                        <select class="@select.Class" name="@select.Name" multiple="@select.Multiple">
+
+                            @foreach (var item in select.SelectList)
+                            {
+                                <option selected="@item.Selected" value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+                    </p>
+
+                }
+
+                else if (type is Radio)
+                {
+
+                    var radio = (Radio)type;
+
+                    <p>
+                        <label>@radio.Label</label>
+                        <input type="@radio.ValidationRules" name="@radio.Name" class="@radio.Class"
+                               value="@radio.Value" required="@radio.Required" disabled="@radio.Disabled" />
+                        <span>@radio.Text</span>
+                    </p>
+                }
+
+                else if (type is Button)
+                {
+                    var button = (Button)type;
+
+                    <button class="@button.Class">@button.Text</button>
+                }
+
+            }
+    </form>
+</div>
+
+
