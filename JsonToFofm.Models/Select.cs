@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace JsonToFofm.Models
 {
-    public class Select: Item
+    public class Select : FormGroup
     {
-        public string Type { get; set; } = "select";
-
-        public IList<SelectListItem> SelectList { get; set; } = new List<SelectListItem>();
+        public IList<Options> Options { get; set; } = new List<Options>();
 
         public bool Multiple { get; set; }
     }

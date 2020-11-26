@@ -25,41 +25,41 @@ namespace JsonToForm.Controllers
         }
 
         [HttpPost]
-        public IActionResult GenerateForm([FromForm]IFormFile jsonFile)
-        {
-            if (jsonFile != null)
-            {
-                FormsViewModel model = new FormsViewModel();
+        //public IActionResult GenerateForm([FromForm]IFormFile jsonFile)
+        //{
+        //    if (jsonFile != null)
+        //    {
+        //        FormsViewModel model = new FormsViewModel();
 
-                Form jsonForm = _fileSerializer.ReadJson(jsonFile);
+        //        Form jsonForm = _fileSerializer.ReadJson(jsonFile);
 
-                if (jsonForm != null)
-                {
-                    model.Name = jsonForm.Name;
-                    model.Name = jsonForm.PostMessage;
+        //        if (jsonForm != null)
+        //        {
+        //            model.Name = jsonForm.Name;
+        //            model.Name = jsonForm.PostMessage;
 
-                    Form deserializedForm = _formSerializer.DeserializeForm(jsonForm);
+        //            Form deserializedForm = _formSerializer.DeserializeForm(jsonForm);
 
-                    if (deserializedForm.Items.Count > 0)
-                    {
-                        model.Items = deserializedForm.Items;
-                        return View(model);
-                    }
-                    else
-                    {
-                        TempData["message"] = "Поддерживаемые типы форм не найдены!";
-                        return View(model);
-                    }
+        //            if (deserializedForm.Items.Count > 0)
+        //            {
+        //                model.Items = deserializedForm.Items;
+        //                return View(model);
+        //            }
+        //            else
+        //            {
+        //                TempData["message"] = "Поддерживаемые типы форм не найдены!";
+        //                return View(model);
+        //            }
 
-                }
+        //        }
 
-                TempData["message"] = "Ошибка десериализации файла!";
-                return RedirectToAction("GetJson");
-            }
+        //        TempData["message"] = "Ошибка десериализации файла!";
+        //        return RedirectToAction("GetJson");
+        //    }
 
-            TempData["message"] = "Ошибка! Файл не обнаружен!";
-            return RedirectToAction("GetJson");
-        }
+        //    TempData["message"] = "Ошибка! Файл не обнаружен!";
+        //    return RedirectToAction("GetJson");
+        //}
 
         // Контроллер для создания тестовых файлов
         public IActionResult CreateTestFile()

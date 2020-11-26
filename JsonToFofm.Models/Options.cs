@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace JsonToFofm.Models
+﻿namespace JsonToFofm.Models
 {
-    public class SelectListItem
+    public class Options
     {
         public string Text { get; set; }
 
