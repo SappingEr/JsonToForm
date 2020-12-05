@@ -21,20 +21,24 @@ namespace JsonToFofm.Models.DataInitialization
             form.Inputs.Add(text);
             form.Inputs.Add(textArea);
 
-            List<Options> options = new List<Options>();
-            options.Add(new Options { Value = 1, Text = "One" });
-            options.Add(new Options { Value = 2, Text = "Two" });
-            options.Add(new Options { Value = 3, Text = "Three", Selected = true });
+            List<Options> options = new List<Options>
+            {
+                new Options { Value = 1, Text = "One" },
+                new Options { Value = 2, Text = "Two" },
+                new Options { Value = 3, Text = "Three", Selected = true }
+            };
 
             Select select = new Select("Select List", "Select List", "",
                 false, "", false, ValidationRules.select, true, options);
 
             form.Inputs.Add(select);
 
-            List<RadioListItem> radio = new List<RadioListItem>();
-            radio.Add(new RadioListItem { Value = "One", Text = "SomeElse" });
-            radio.Add(new RadioListItem { Value = "Two", Text = "SomeElse1" });
-            radio.Add(new RadioListItem { Value = "Three", Text = "SomeElse2", Checked =true });
+            List<RadioListItem> radio = new List<RadioListItem>
+            {
+                new RadioListItem { Value = "One", Text = "SomeElse" },
+                new RadioListItem { Value = "Two", Text = "SomeElse1" },
+                new RadioListItem { Value = "Three", Text = "SomeElse2", Checked = true }
+            };
 
             Radio radioForm = new Radio("Radio", "Radio", "", false, "", false, ValidationRules.radio, radio);
 

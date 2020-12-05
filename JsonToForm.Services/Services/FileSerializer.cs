@@ -1,28 +1,29 @@
 ﻿using JsonToFofm.Models;
+using JsonToFofm.Models.DataInitialization;
+using JsonToForm.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
-namespace JsonToForm.Services
+namespace JsonToForm.Services.Services
 {
-    public class FileSerializer : IFileSerializer
+    class FileSerializer : IFileSerializer
     {
-        
-
-        public async void FormToJsonAsync()
+        public void FormToJson()
         {
-           
-
-
-
-            //options.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
-            //FileStream fs = new FileStream(@"\TFile.json", FileMode.OpenOrCreate);
-            //Form form = JsonFormInitializer.InitializeFormData();
-            //await JsonSerializer.SerializeAsync(fs, form, form.GetType(), options);
+            JsonSerializer serializer = new JsonSerializer();
+            Form form = JsonFormInitializer.InitializeFormData();
+            using StreamWriter sw = new StreamWriter(@"c:\json.txt");
+            using JsonWriter writer = new JsonTextWriter(sw);
+            serializer.Serialize(writer, form);
         }
 
         public Form ReadJson(IFormFile jsonFile)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

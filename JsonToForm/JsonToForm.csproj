@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\JsonToFofm.Models\JsonToFofm.Models.csproj" />
+    <ProjectReference Include="..\JsonToForm.Services\JsonToForm.Services.csproj" />
   </ItemGroup>
 
 
