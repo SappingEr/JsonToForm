@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonToForm", "JsonToForm\JsonToForm.csproj", "{4DF54D0B-9E7B-49BD-842E-7D0A4420A285}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonToForm", "JsonToForm\JsonToForm.csproj", "{4DF54D0B-9E7B-49BD-842E-7D0A4420A285}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonToFofm.Models", "JsonToFofm.Models\JsonToFofm.Models.csproj", "{9940593A-F962-4D91-9761-30E4D695039C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonToFofm.Models", "JsonToFofm.Models\JsonToFofm.Models.csproj", "{9940593A-F962-4D91-9761-30E4D695039C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonToForm.Services", "JsonToForm.Services\JsonToForm.Services.csproj", "{1AEAF204-6A6E-4BA8-A120-78EF8E7D0890}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{9940593A-F962-4D91-9761-30E4D695039C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9940593A-F962-4D91-9761-30E4D695039C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9940593A-F962-4D91-9761-30E4D695039C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AEAF204-6A6E-4BA8-A120-78EF8E7D0890}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AEAF204-6A6E-4BA8-A120-78EF8E7D0890}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AEAF204-6A6E-4BA8-A120-78EF8E7D0890}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AEAF204-6A6E-4BA8-A120-78EF8E7D0890}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

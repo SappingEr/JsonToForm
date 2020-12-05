@@ -1,6 +1,6 @@
 ﻿namespace JsonToFofm.Models
 {
-    public class Button : FormInput
+    public class Button : Input
     {       
     }
 }

@@ -7,8 +7,16 @@ namespace JsonToFofm.Models
     {
         public string Name { get; set; }
 
-        public List<FormInput> Inputs { get; set; } = new List<FormInput>();
+        public List<Input> Inputs { get; set; } = new List<Input>();
 
         public string PostMessage { get; set; }
+
+        public Form() { }
+
+        public Form(string name, string postMessage)
+        {
+            Name = name;
+            PostMessage = postMessage;
+        }
     }
 }
