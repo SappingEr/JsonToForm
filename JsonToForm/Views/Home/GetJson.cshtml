@@ -1,14 +1,22 @@
-﻿@{
-    ViewData["Title"] = "Загрузка файла JSON";
+﻿@model JsonToForm.Models.JsonFileViewModel
+
+@{
+    ViewData["Title"] = "Загрузка файла";
 }
 
-<h3>Загрузка файла JSON</h3>
+<h1>Загрузка файла JSON</h1>
 
-<h4 class="text-danger">@TempData["message"]</h4>
+<hr />
 
-<form asp-action="GenerateForm" asp-controller="Home" method="post" enctype="multipart/form-data">
-    <input type="file" name="jsonFile" accept=".json" required/>
-    <br />
-    <br />
-    <input type="submit" value="Загрузить" />
+<form asp-action="GetJson" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <p><input asp-for="FileJson" /></p>
+    <p><input type="submit" value="Upload" /></p>    
+    <span asp-validation-for="FileJson" class="text-danger"></span>
 </form>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

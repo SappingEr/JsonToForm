@@ -3,20 +3,25 @@ using JsonToFofm.Models.DataInitialization;
 using JsonToForm.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace JsonToForm.Services.Services
 {
     public class JsonFileSerializer : IJsonFileSerializer
     {
+
+
         public void FormToJsonFile()
         {
-            JsonSerializer serializer = new JsonSerializer();
-            serializer.Formatting = Formatting.Indented;
+            JsonSerializer serializer = new JsonSerializer
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                TypeNameHandling = TypeNameHandling.All,
+                Formatting = Formatting.Indented
+            };
+
             Form form = JsonFormInitializer.InitializeFormData();
+
             using StreamWriter sw = new StreamWriter(@"c:\json.txt");
             using JsonWriter writer = new JsonTextWriter(sw);
             serializer.Serialize(writer, form);
@@ -29,9 +34,15 @@ namespace JsonToForm.Services.Services
             {
                 fileContent = reader.ReadToEnd();
             }
-            Form form = JsonConvert.DeserializeObject<Form>(fileContent);
+
+            Form form = JsonConvert.DeserializeObject<Form>(fileContent, new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.Auto,
+                NullValueHandling = NullValueHandling.Ignore
+            });
 
             return form;
         }
     }
 }
+

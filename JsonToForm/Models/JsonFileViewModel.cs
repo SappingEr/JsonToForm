@@ -9,7 +9,7 @@ namespace JsonToForm.Models
         [Required(ErrorMessage = "Выберите файл.")]
         [DataType(DataType.Upload)]
         [MaxFileSize(4_194_304)]
-        [AllowedExtensions(new string[] { ".json" })]
-        public IFormFile Photo { get; set; }
+        [AllowedExtensions(new string[] { ".txt" })]
+        public IFormFile FileJson { get; set; }
     }
 }

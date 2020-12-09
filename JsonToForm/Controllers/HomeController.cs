@@ -5,48 +5,64 @@ using JsonToForm.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using JsonToFofm.Models;
 
 namespace JsonToForm.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IJsonFileSerializer _fileSerializer;       
+        private readonly IJsonFileSerializer fileSerializer;       
 
         public HomeController(IJsonFileSerializer fileSerializer)
         {
-            _fileSerializer = fileSerializer;
+            this.fileSerializer = fileSerializer;
             
         }
 
+        [HttpGet]
         public IActionResult GetJson()
         {
-            return View();
+            JsonFileViewModel fileModel = new JsonFileViewModel();
+            return View(fileModel);
         }
 
         [HttpPost]
-        public IActionResult GenerateForm([FromForm] IFormFile jsonFile)
+        public IActionResult GetJson(JsonFileViewModel fileModel)
         {
-            if (jsonFile != null)
+            if (ModelState.IsValid)
             {
-                FormsViewModel model = new FormsViewModel();
+                IFormFile formFile = fileModel.FileJson;
 
-                Form jsonForm = _fileSerializer.ReadJson(jsonFile);
+                if (formFile != null && formFile.Length > 0)
+                {
+                    FormsViewModel formModel = new FormsViewModel();
+                    Form form = fileSerializer.ReadJson(formFile);
+                    formModel.Form = form;
+                    return RedirectToAction("GenerateForm", "Home", form);
+                }
 
-                
+                ModelState.AddModelError("", "Uploaded file is empty or null.");
+                return View(fileModel);
+            }
+            return View(fileModel);
+        }
 
-                TempData["message"] = "Ошибка десериализации файла!";
-                return RedirectToAction("GetJson");
+        [HttpPost]
+        public IActionResult GenerateForm(FormsViewModel formModel)
+        {
+            if (formModel.Form != null)
+            {
+                return View(formModel);
             }
 
-            TempData["message"] = "Ошибка! Файл не обнаружен!";
-            return RedirectToAction("GetJson");
+            return BadRequest();
         }
 
         // Контроллер для создания тестовых файлов
         [HttpGet]
         public IActionResult CreateTestFile()
         {
-            _fileSerializer.FormToJsonFile();
+            fileSerializer.FormToJsonFile();
 
             return View();
         }
