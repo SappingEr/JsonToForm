@@ -1,11 +1,11 @@
 ﻿using JsonToFofm.Models;
 using Microsoft.AspNetCore.Http;
 
-namespace JsonToForm.Interfaces
+namespace JsonToForm.Services.Interfaces
 {
-    public interface IFileSerializer
+    public interface IJsonFileSerializer
     {
-        void FormToJsonAsync();
+        void FormToJsonFile();
 
         Form ReadJson(IFormFile jsonFile);
     }

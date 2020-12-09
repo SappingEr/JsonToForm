@@ -4,9 +4,7 @@
     {
         public string Name { get; set; }
 
-        public string Label { get; set; }
-
-        public string Class { get; set; }
+        public string Label { get; set; }        
 
         public bool Required { get; set; }       
 

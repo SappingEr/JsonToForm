@@ -1,7 +1,7 @@
-﻿using JsonToFofm.Models;
-using JsonToForm.Interfaces;
+﻿
 using JsonToForm.Models;
-using JsonToForm.Services;
+using JsonToForm.Services.Services;
+using JsonToForm.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -10,13 +10,12 @@ namespace JsonToForm.Controllers
 {
     public class HomeController : Controller
     {
-        private IFileSerializer _fileSerializer;
-        private FormSerializer _formSerializer;
+        private readonly IJsonFileSerializer _fileSerializer;       
 
-        public HomeController(IFileSerializer fileSerializer, FormSerializer formSerializer)
+        public HomeController(IJsonFileSerializer fileSerializer)
         {
             _fileSerializer = fileSerializer;
-            _formSerializer = formSerializer;
+            
         }
 
         public IActionResult GetJson()
@@ -25,46 +24,29 @@ namespace JsonToForm.Controllers
         }
 
         [HttpPost]
-        //public IActionResult GenerateForm([FromForm]IFormFile jsonFile)
-        //{
-        //    if (jsonFile != null)
-        //    {
-        //        FormsViewModel model = new FormsViewModel();
+        public IActionResult GenerateForm([FromForm] IFormFile jsonFile)
+        {
+            if (jsonFile != null)
+            {
+                FormsViewModel model = new FormsViewModel();
 
-        //        Form jsonForm = _fileSerializer.ReadJson(jsonFile);
+                Form jsonForm = _fileSerializer.ReadJson(jsonFile);
 
-        //        if (jsonForm != null)
-        //        {
-        //            model.Name = jsonForm.Name;
-        //            model.Name = jsonForm.PostMessage;
+                
 
-        //            Form deserializedForm = _formSerializer.DeserializeForm(jsonForm);
+                TempData["message"] = "Ошибка десериализации файла!";
+                return RedirectToAction("GetJson");
+            }
 
-        //            if (deserializedForm.Items.Count > 0)
-        //            {
-        //                model.Items = deserializedForm.Items;
-        //                return View(model);
-        //            }
-        //            else
-        //            {
-        //                TempData["message"] = "Поддерживаемые типы форм не найдены!";
-        //                return View(model);
-        //            }
-
-        //        }
-
-        //        TempData["message"] = "Ошибка десериализации файла!";
-        //        return RedirectToAction("GetJson");
-        //    }
-
-        //    TempData["message"] = "Ошибка! Файл не обнаружен!";
-        //    return RedirectToAction("GetJson");
-        //}
+            TempData["message"] = "Ошибка! Файл не обнаружен!";
+            return RedirectToAction("GetJson");
+        }
 
         // Контроллер для создания тестовых файлов
+        [HttpGet]
         public IActionResult CreateTestFile()
         {
-            _fileSerializer.FormToJsonAsync();
+            _fileSerializer.FormToJsonFile();
 
             return View();
         }

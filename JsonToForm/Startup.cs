@@ -1,4 +1,3 @@
-using JsonToForm.Interfaces;
 using JsonToForm.Services.Services;
 using JsonToForm.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -21,7 +20,7 @@ namespace JsonToForm
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IFileSerializer, FileSerializer>();            
+            services.AddTransient<IJsonFileSerializer, JsonFileSerializer>();            
             services.AddControllersWithViews();
         }
 

@@ -10,11 +10,12 @@ using System.Text;
 
 namespace JsonToForm.Services.Services
 {
-    class FileSerializer : IFileSerializer
+    public class JsonFileSerializer : IJsonFileSerializer
     {
-        public void FormToJson()
+        public void FormToJsonFile()
         {
             JsonSerializer serializer = new JsonSerializer();
+            serializer.Formatting = Formatting.Indented;
             Form form = JsonFormInitializer.InitializeFormData();
             using StreamWriter sw = new StreamWriter(@"c:\json.txt");
             using JsonWriter writer = new JsonTextWriter(sw);
@@ -23,7 +24,14 @@ namespace JsonToForm.Services.Services
 
         public Form ReadJson(IFormFile jsonFile)
         {
-            throw new NotImplementedException();
+            string fileContent = null;
+            using (var reader = new StreamReader(jsonFile.OpenReadStream()))
+            {
+                fileContent = reader.ReadToEnd();
+            }
+            Form form = JsonConvert.DeserializeObject<Form>(fileContent);
+
+            return form;
         }
     }
 }

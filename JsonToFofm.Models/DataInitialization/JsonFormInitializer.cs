@@ -44,6 +44,10 @@ namespace JsonToFofm.Models.DataInitialization
 
             form.Inputs.Add(radioForm);
 
+            Button button = new Button { Text = "Confirm", Class = "" };
+
+            form.Inputs.Add(button);
+
             return form;
         }
     }
