@@ -35,30 +35,26 @@ namespace JsonToForm.Controllers
 
                 if (formFile != null && formFile.Length > 0)
                 {
-                    FormsViewModel formModel = new FormsViewModel();
                     Form form = fileSerializer.ReadJson(formFile);
-                    formModel.Form = form;
-                    return RedirectToAction("GenerateForm", "Home", form);
+
+                    if (form != null)
+                    {
+                        FormsViewModel formModel = new FormsViewModel
+                        {
+                            Form = form
+                        };
+
+                        return View("GenerateForm", formModel);
+                    }
                 }
 
                 ModelState.AddModelError("", "Uploaded file is empty or null.");
                 return View(fileModel);
             }
             return View(fileModel);
-        }
+        }        
 
-        [HttpPost]
-        public IActionResult GenerateForm(FormsViewModel formModel)
-        {
-            if (formModel.Form != null)
-            {
-                return View(formModel);
-            }
-
-            return BadRequest();
-        }
-
-        // Контроллер для создания тестовых файлов
+        // Create test file.
         [HttpGet]
         public IActionResult CreateTestFile()
         {

@@ -21,6 +21,17 @@ namespace JsonToFofm.Models.DataInitialization
             form.Inputs.Add(text);
             form.Inputs.Add(textArea);
 
+            Filler textForCheckbox = new Filler("Some text for checkbox");
+
+            CheckBox checkBox = new CheckBox("Check", "Check", "form-control", false, "", false, ValidationRules.checkbox, true);
+            CheckBox checkBox2 = new CheckBox("Check2", "Check2", "form-control", false, "", false, ValidationRules.checkbox, false);
+            CheckBox checkBox3 = new CheckBox("Check3", "Check3", "form-control", false, "", false, ValidationRules.checkbox, false);
+
+            form.Inputs.Add(textForCheckbox);
+            form.Inputs.Add(checkBox);
+            form.Inputs.Add(checkBox2);
+            form.Inputs.Add(checkBox3);
+
             List<Options> options = new List<Options>
             {
                 new Options { Value = 1, Text = "One" },

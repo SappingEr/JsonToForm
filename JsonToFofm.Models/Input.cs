@@ -6,7 +6,7 @@
 
         public string Class { get; set; }
 
-        public Input() { }
+        public Input() {}
 
         public Input(string text)
         {

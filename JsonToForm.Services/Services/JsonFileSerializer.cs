@@ -16,7 +16,7 @@ namespace JsonToForm.Services.Services
             JsonSerializer serializer = new JsonSerializer
             {
                 NullValueHandling = NullValueHandling.Ignore,
-                TypeNameHandling = TypeNameHandling.All,
+                TypeNameHandling = TypeNameHandling.Auto,
                 Formatting = Formatting.Indented
             };
 
